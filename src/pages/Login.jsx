@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Logged in with Email: ${email}`);
+
+    try {
+        const response = await loginUser({ email, password });
+        console.log("Register success:", response.data);
+        navigate("/landing");
+    } catch (error) {
+        console.error("Login error:", error);
+        let msg = "Login failed";
+        if (error.response && error.response.data) {
+            msg = error.response.data;
+        }
+        alert(msg);
+    };
   };
 
   return (
@@ -31,7 +44,7 @@ function Login() {
           required
         />
         <Button type="submit">Login</Button>
-        <Button onClick={() => navigate("/")}>Back to Landing</Button>
+        <Button onClick={() => navigate("/")}>Back to Home</Button>
       </Form>
     </Container>
   );
