@@ -1,16 +1,36 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../api/auth";
 
 function Registration() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    alert(`Registered!\nName: ${name}\nEmail: ${email}`);
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    try {
+        const response = await registerUser({ email, password });
+
+        console.log("Register success:", response.data);
+
+        navigate("/login");
+    } catch (error) {
+        console.error("Registration error:", error);
+        let msg = "Registration failed";
+        if (error.response && error.response.data) {
+            msg = error.response.data;
+        }
+        alert(msg);
+    }
   };
 
   return (
@@ -19,13 +39,6 @@ function Registration() {
         <Form onSubmit={handleRegister}>
             <Input
             type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            />
-            <Input
-            type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -38,9 +51,16 @@ function Registration() {
             onChange={(e) => setPassword(e.target.value)}
             required
             />
+            <Input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            />
             <Button type="submit">Register</Button>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-                <Button onClick={() => navigate("/")}>Back to Landing</Button>
+                <Button onClick={() => navigate("/")}>Back to Home</Button>
                 <Button onClick={() => navigate("/login")}>Go to Login</Button>
                 
             </div>
