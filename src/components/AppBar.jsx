@@ -29,3 +29,7 @@ export const NavLink = styled.a`
     color: #FFA500;
   }
 `;
+
+export default {
+  AppBar,
+}

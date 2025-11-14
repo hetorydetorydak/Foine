@@ -13,12 +13,19 @@ function Login() {
 
     try {
         const response = await loginUser({ email, password });
-        console.log("Register success:", response.data);
+
+        // if (response.data) {
+          // localStorage.setItem("token", response.data.token);
+        console.log(localStorage.getItem("token"));
         navigate("/landing");
+        // } else {
+        //   alert("Login failed. No token received.");
+        // }
+
     } catch (error) {
-        console.error("Login error:", error);
+        console.log(error);
         let msg = "Login failed";
-        if (error.response && error.response.data) {
+        if (error.response?.data) {
             msg = error.response.data;
         }
         alert(msg);

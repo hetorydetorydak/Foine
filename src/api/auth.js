@@ -1,24 +1,23 @@
 import axios from "axios";
 
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
-
-const axiosInstance = axios.create({
-    baseURL: API_BASE,
-    timeout: 5000,
-    headers: { "Content-Type": "application/json" },
-});
-
-axiosInstance.interceptors.response.use(
-    response => response,
-    error => {
-        return Promise.reject(error);
-    }
-);
+const API = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
 
 export const registerUser = (user) => {
-    return axiosInstance.post("/register", user);
+    return axios.post(`${API}/register`, user);
 }
 
-export const loginUser = (credentials) => {
-    return axiosInstance.post("/login", credentials);
+export const loginUser = async (credentials) => {
+    const res = await axios.post(`${API}/login`, credentials);
+
+    const token = res.data.token;
+    console.log(token);
+
+    localStorage.setItem("token", token);
+
+    return res.data;
+}
+
+export const logout = () => {
+    axios.post(`${API}/logout`).catch(() => {});
+    localStorage.removeItem("token");
 }
