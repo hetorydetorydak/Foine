@@ -1,10 +1,20 @@
 import styled from "styled-components";
+import AppBar from "../components/AppBar";
+import Button from "../components/Button";
+import { logout } from "../api/auth";
 
 export default function Landing() {
+  
+  const handleLogout = () => {
+    logout();
+    window.location.href = "/login";
+  }
+
   return (
-    <WelcomeMessage>
-      Welcome BitchAss
-    </WelcomeMessage>
+    <>
+      <h1>Welcome</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </>
   )
 }
 

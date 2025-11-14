@@ -7,6 +7,7 @@ function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -18,11 +19,12 @@ function Registration() {
     }
 
     try {
-        const response = await registerUser({ email, password });
+        const response = await registerUser({ email, password, username });
 
         console.log("Register success:", response.data);
 
         navigate("/login");
+        
     } catch (error) {
         console.error("Registration error:", error);
         let msg = "Registration failed";
@@ -42,6 +44,13 @@ function Registration() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            />
+            <Input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             />
             <Input

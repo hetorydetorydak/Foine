@@ -18,3 +18,7 @@ export const Button = styled.button`
     color: white;
   }
 `;
+
+export default {
+  Button,
+}
