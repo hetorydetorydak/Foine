@@ -22,7 +22,6 @@ export const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
   text-decoration: ${({ variant }) => variant === 'text' ? 'underline' : 'none'};
 
   &:hover {
