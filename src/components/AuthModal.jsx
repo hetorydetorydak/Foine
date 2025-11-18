@@ -152,7 +152,7 @@ const LoginForm = ({ onClose }) => {
         <ForgotPassword href="#">Forgot password?</ForgotPassword>
       </FormOptions>
 
-      <Button type="submit" fullWidth>Sign In</Button>
+      <Button type="submit">Sign In</Button>
 
       <Divider>
         <span>OR</span>
