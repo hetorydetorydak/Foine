@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth";
+import { AppBar, Container, AuthContainer } from "../components/AppBar";
+import { Button, FormButton, ButtonNoFill, NavButton } from "../components/Button";
+import { Input, Form, Title, AuthLink } from "../components/Form";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -33,68 +36,42 @@ function Login() {
   };
 
   return (
-    <Container>
-      <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Button type="submit">Login</Button>
-        <Button onClick={() => navigate("/")}>Back to Home</Button>
-      </Form>
-    </Container>
+    <>
+      <AppBar>
+        <AuthLink onClick={() => navigate("/")}>Foine</AuthLink>
+        <div>
+          <ButtonNoFill onClick={() => navigate("/login")}>Login</ButtonNoFill>
+          <Button onClick={() => navigate("/register")}>Sign up</Button>
+        </div>
+      </AppBar>
+      <Container>
+        <AuthContainer>
+          <Title>Login</Title>
+          <Form onSubmit={handleSubmit}>
+            <div>
+              <NavButton type="button" style={{ background: "#333", color: "white", }} onClick={() => navigate("/Login")}>Login</NavButton>
+              <NavButton type="button" onClick={() => navigate("/register")}>Sign up</NavButton>
+            </div>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <FormButton type="submit">Login</FormButton>
+          </Form>
+        </AuthContainer>
+      </Container>
+    </>
   );
 }
 
 export default Login;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: #f0f4f8;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-`;
-
-const Input = styled.input`
-  margin: 8px 0;
-  padding: 10px;
-  width: 250px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-`;
-
-const Button = styled.button`
-  margin-top: 10px;
-  padding: 10px 20px;
-  background: #2e8b57;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background: #246c45;
-  }
-`;
