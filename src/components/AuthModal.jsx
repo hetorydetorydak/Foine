@@ -54,8 +54,8 @@ const AuthModal = ({ isOpen, initialType = 'login', onClose }) => {
   if (!isOpen && !isClosing) return null;
 
   return (
-    <ModalOverlay onClick={handleOverlayClick} isClosing={isClosing}>
-      <ModalContent isClosing={isClosing}>
+    <ModalOverlay onClick={handleOverlayClick} $isClosing={isClosing}>
+      <ModalContent $isClosing={isClosing}>
         <ModalHeader>
           <WelcomeSection>
             <WelcomeTitle>
@@ -73,13 +73,13 @@ const AuthModal = ({ isOpen, initialType = 'login', onClose }) => {
 
         <TabContainer>
           <TabButton 
-            active={activeTab === 'login'} 
+            $active={activeTab === 'login'} 
             onClick={() => setActiveTab('login')}
           >
             Sign In
           </TabButton>
           <TabButton 
-            active={activeTab === 'register'} 
+            $active={activeTab === 'register'} 
             onClick={() => setActiveTab('register')}
           >
             Sign Up
@@ -272,7 +272,7 @@ const ModalOverlay = styled.div`
     justify-content: flex-end;
     align-items: center;
     z-index: 1000;
-    animation: ${props => props.isClosing ? slideOutToRight : 'none'} 0.3s ease;
+    animation: ${props => props.$isClosing ? slideOutToRight : 'none'} 0.3s ease;
 `;
 
 const ModalContent = styled.div`
@@ -284,7 +284,7 @@ const ModalContent = styled.div`
     background: white;
     border-radius: 24px;
     color: #003B5C;
-    animation: ${props => props.isClosing ? slideOutToRight : slideInFromRight} 0.3s ease;
+    animation: ${props => props.$isClosing ? slideOutToRight : slideInFromRight} 0.3s ease;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -353,12 +353,12 @@ const TabButton = styled.button`
     border: none;
     cursor: pointer;
     font-weight: 600;
-    background: ${props => props.active ? '#0a1e23' : 'transparent'};
-    color: ${props => props.active ? 'white' : '#0a1e23'};
+    background: ${props => props.$active ? '#0a1e23' : 'transparent'};
+    color: ${props => props.$active ? 'white' : '#0a1e23'};
     transition: all 0.3s ease;
 
     &:hover {
-        background: ${props => props.active ? '#0a1e23' : '#f0f4f8'};
+        background: ${props => props.$active ? '#0a1e23' : '#f0f4f8'};
     }
 `;
 
@@ -399,8 +399,8 @@ const CustomCheckbox = styled.div`
     justify-content: center;
     font-size: 12px;
     color: white;
-    background: ${props => props.checked ? '#0a1e23' : 'transparent'};
-    border-color: ${props => props.checked ? '#0a1e23' : '#ddd'};
+    background: ${props => props.$checked ? '#0a1e23' : 'transparent'};
+    border-color: ${props => props.$checked ? '#0a1e23' : '#ddd'};
     transition: all 0.2s ease;
 `;
 
