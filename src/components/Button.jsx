@@ -1,97 +1,47 @@
+// components/Button.js
 import styled from 'styled-components';
 
-export const Button1 = styled.button`
+export const Button = styled.button`
   background-color: ${({ variant }) => 
-    variant === 'outline' ? 'transparent' : '#2E8B57'};
+    variant === 'outline' ? 'transparent' : 
+    variant === 'text' ? 'transparent' : '#0a1e23'};
+  
   color: ${({ variant }) => 
-    variant === 'outline' ? '#2E8B57' : 'white'};
-  border: 2px solid #2E8B57;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+    variant === 'outline' ? '#FFFFFF' : 
+    variant === 'text' ? '#FFFFFF' : '#FFFFFF'};
+    
+  
+  border: ${({ variant }) => 
+    variant === 'text' ? 'none' : 
+    variant === 'outline' ? '2px solid #FFFFFF': '#0a1e23'};
+  
+  padding: ${({ variant }) => 
+    variant === 'text' ? '0.5rem 1rem' : '0.75rem 1.5rem'};
+  
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
+  text-decoration: ${({ variant }) => variant === 'text' ? 'underline' : 'none'};
 
   &:hover {
     background-color: ${({ variant }) => 
-      variant === 'outline' ? '#2E8B57' : '#256b46'};
-    color: white;
+      variant === 'outline' ? '#FFFFFF' : 
+      variant === 'text' ? 'rgba(255, 255, 255, 0.1)' : '#F0F0F0'};
+    
+    color: ${({ variant }) => 
+      variant === 'text' ? '#FFFFFF' : '#003B5C'};
+    
+    transform: ${({ variant }) => variant === 'text' ? 'none' : 'translateY(-1px)'};
+    
+    box-shadow: ${({ variant }) => 
+      variant === 'text' ? 'none' : '0 4px 12px rgba(255, 255, 255, 0.3)'};
+    
+    text-decoration: ${({ variant }) => variant === 'text' ? 'none' : 'none'};
+  }
+
+  &:active {
+    transform: ${({ variant }) => variant === 'text' ? 'none' : 'translateY(0)'};
   }
 `;
-
-export const ButtonNoFill = styled.button`
-  margin: 10px;
-  border: none;
-  background: none;
-  color: white;
-  font-size: 1rem;
-  font-family: 'Times New Roman', serif;
-  cursor: pointer;
-`;
-
-export const Button = styled.button`
-  margin: 10px;
-  margin-right: 50px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-family: 'Times New Roman', serif;
-  background: #D9D9D9;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background: #246c45;
-    color: white;
-  }
-`;
-
-export const FormButton = styled.button`
-  margin: 10px;
-  margin-right: 50px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-family: 'Times New Roman', serif;
-  background: #D9D9D9;
-  margin: 10px auto;
-  color: black;
-  width: 385px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background: #246c45;
-    color: white;
-  }
-`;
-
-export const NavButton = styled.button`
-  margin: 10px;
-  margin-right: 50px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-family: 'Times New Roman', serif;
-  background: #D9D9D9;
-  margin: 10px auto;
-  color: black;
-  width: 200px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background: #246c45;
-    color: white;
-  }
-`;
-
-export default {
-  Button,
-  ButtonNoFill,
-  FormButton,
-}
