@@ -98,40 +98,25 @@ const AuthModal = ({ isOpen, initialType = 'login', onClose }) => {
   );
 };
 
-const LoginForm = ({ onClose }) => {
+const LoginForm = ({ onSuccess }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-        const response = await loginUser({ email, password });
-
-        // if (response.data) {
-          // localStorage.setItem("token", response.data.token);
-        console.log(localStorage.getItem("token"));
+      try {
+        await loginUser({ email, password });
         navigate("/landing");
-        // } else {
-        //   alert("Login failed. No token received.");
-        // }
-
-    } catch (error) {
-        console.log(error);
-        let msg = "Login failed";
-        if (error.response?.data) {
-            msg = error.response.data;
-        }
-        alert(msg);
-    };
-
+        onSuccess();
+      } catch (err) {
+        console.log(err);
+      }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input
+      {/* <Input
         type="email"
         name="email"
         placeholder="Enter your email"
@@ -164,6 +149,18 @@ const LoginForm = ({ onClose }) => {
         <ForgotPassword href="#">Forgot password?</ForgotPassword>
       </FormOptions>
 
+      <Button type="submit">Sign In</Button> */}
+
+      <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+      <Input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+
       <Button type="submit">Sign In</Button>
 
       <Divider>
@@ -184,18 +181,16 @@ const LoginForm = ({ onClose }) => {
   );
 };
 
-const RegisterForm = ({ onClose }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
+const RegisterForm = ({ onSuccess }) => {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== confirm) {
       alert("Passwords don't match!");
       return;
     }
@@ -203,32 +198,24 @@ const RegisterForm = ({ onClose }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
+    if (password !== confirm) {
+      alert("Passwords do not match!");
+      return;
     }
 
     try {
-        const response = await registerUser({ email, password, username });
-
-        console.log("Register success:", response.data);
-
-        navigate("/login");
-        
-    } catch (error) {
-        console.error("Registration error:", error);
-        let msg = "Registration failed";
-        if (error.response && error.response.data) {
-            msg = error.response.data;
-        }
-        alert(msg);
+      await registerUser({ email, password, username });
+      navigate("/login");
+      onSuccess();
+    } catch (err) {
+      console.log(err);
     }
   };
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input
+      {/* <Input
         type="email"
         name="email"
         placeholder="Enter your email"
@@ -276,7 +263,23 @@ const RegisterForm = ({ onClose }) => {
         </CheckboxLabel>
       </FormOptions>
 
-      <Button type="submit" >Sign Up</Button>
+      <Button type="submit" >Sign Up</Button> */}
+
+            <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      
+            <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+      
+            <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      
+            <Input
+              type="password"
+              placeholder="Confirm password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              required
+            />
+      
+            <Button type="submit">Sign Up</Button>
 
       <Divider>
         <span>OR</span>
