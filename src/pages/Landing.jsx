@@ -11,7 +11,7 @@ export default function Landing() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/");
   }
 
   // Tab state: 'create' or 'public'
