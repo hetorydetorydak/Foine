@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Button } from './Button';
 import { Input } from './Input';
+import { useNavigate } from 'react-router-dom';
+import { loginUser, registerUser } from '../api/auth';
 
 const slideInFromRight = keyframes`
   from {
@@ -97,24 +99,34 @@ const AuthModal = ({ isOpen, initialType = 'login', onClose }) => {
 };
 
 const LoginForm = ({ onClose }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false
-  });
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login data:', formData);
-    // Handle login logic here
-  };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
+    try {
+        const response = await loginUser({ email, password });
+
+        // if (response.data) {
+          // localStorage.setItem("token", response.data.token);
+        console.log(localStorage.getItem("token"));
+        navigate("/landing");
+        // } else {
+        //   alert("Login failed. No token received.");
+        // }
+
+    } catch (error) {
+        console.log(error);
+        let msg = "Login failed";
+        if (error.response?.data) {
+            msg = error.response.data;
+        }
+        alert(msg);
+    };
+
   };
 
   return (
@@ -123,16 +135,16 @@ const LoginForm = ({ onClose }) => {
         type="email"
         name="email"
         placeholder="Enter your email"
-        value={formData.email}
-        onChange={handleChange}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         required
       />
       <Input
         type="password"
         name="password"
         placeholder="Enter your password"
-        value={formData.password}
-        onChange={handleChange}
+        value={password}
+        onChange={(e) => setPassword(e.target.password)}
         required
       />
       
@@ -141,10 +153,10 @@ const LoginForm = ({ onClose }) => {
           <HiddenCheckbox
             type="checkbox"
             name="rememberMe"
-            checked={formData.rememberMe}
-            onChange={handleChange}
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.value)}
           />
-          <CustomCheckbox checked={formData.rememberMe}>
+          <CustomCheckbox checked={rememberMe}>
             ✓
           </CustomCheckbox>
           <span>Remember me</span>
@@ -173,29 +185,45 @@ const LoginForm = ({ onClose }) => {
 };
 
 const RegisterForm = ({ onClose }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    rememberMe: false
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
+  const navigate = useNavigate();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-    console.log('Register data:', formData);
-    // Handle registration logic here
-  };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    try {
+        const response = await registerUser({ email, password, username });
+
+        console.log("Register success:", response.data);
+
+        navigate("/login");
+        
+    } catch (error) {
+        console.error("Registration error:", error);
+        let msg = "Registration failed";
+        if (error.response && error.response.data) {
+            msg = error.response.data;
+        }
+        alert(msg);
+    }
+  };
   };
 
   return (
@@ -204,24 +232,32 @@ const RegisterForm = ({ onClose }) => {
         type="email"
         name="email"
         placeholder="Enter your email"
-        value={formData.email}
-        onChange={handleChange}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <Input
+        type="text"
+        name="username"
+        placeholder="Enter your username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         required
       />
       <Input
         type="password"
         name="password"
         placeholder="Enter your password"
-        value={formData.password}
-        onChange={handleChange}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         required
       />
       <Input
         type="password"
         name="confirmPassword"
         placeholder="Confirm your password"
-        value={formData.confirmPassword}
-        onChange={handleChange}
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
       
@@ -230,10 +266,10 @@ const RegisterForm = ({ onClose }) => {
           <HiddenCheckbox
             type="checkbox"
             name="rememberMe"
-            checked={formData.rememberMe}
-            onChange={handleChange}
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.value)}
           />
-          <CustomCheckbox checked={formData.rememberMe}>
+          <CustomCheckbox checked={rememberMe}>
             ✓
           </CustomCheckbox>
           <span>Remember me</span>
