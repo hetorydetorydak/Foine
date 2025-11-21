@@ -10,6 +10,7 @@ export const LoginForm = ({ onSuccess }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ export const LoginForm = ({ onSuccess }) => {
       onSuccess && onSuccess();
     } catch (err) {
       console.log(err);
+      setError("*Invalid email or password");
     }
   };
 
@@ -26,6 +28,7 @@ export const LoginForm = ({ onSuccess }) => {
     <Form onSubmit={handleSubmit}>
       <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <ErrorMessage>{error}</ErrorMessage>
       <Button type="submit">Sign In</Button>
 
       <Divider><span>OR</span></Divider>
@@ -44,11 +47,12 @@ export const RegisterForm = ({ onSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirm) {
-      alert("Passwords do not match!");
+      setError("*Passwords do not match");
       return;
     }
     try {
@@ -66,6 +70,7 @@ export const RegisterForm = ({ onSuccess }) => {
       <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
       <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <Input type="password" placeholder="Confirm password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
+      <ErrorMessage>{error}</ErrorMessage>
       <Button type="submit">Sign Up</Button>
 
       <Divider><span>OR</span></Divider>
@@ -131,4 +136,10 @@ const SocialButton = styled.button`
     border-color: #0a1e23;
     background: #f8f9fa;
   }
+`;
+
+const ErrorMessage = styled.h6`
+  color: red;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
 `;
