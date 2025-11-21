@@ -76,7 +76,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: 50%; min-width: 420px; max-width: 600px;
   height: -webkit-fill-available;
-  padding: 75px 50px;
+  padding: 20px 50px;
   background: white;
   border-radius: 24px;
   color: #003B5C;
@@ -100,22 +100,54 @@ const ModalHeader = styled.div`
 `;
 
 const WelcomeSection = styled.div`flex: 1;`;
-const WelcomeTitle = styled.h2`font-size:1.5rem; font-weight:700; margin-bottom:0.5rem; color:#003B5C;`;
-const WelcomeSubtitle = styled.p`color:#666; font-size:0.9rem;`;
+const WelcomeTitle = styled.h2`
+  font-size:1.5rem; 
+  font-weight:700;
+  margin-bottom:0.5rem; 
+  color:#003B5C;
+`;
+const WelcomeSubtitle = styled.p`
+  color:#666; 
+  font-size:0.9rem;
+
+`;
 const CloseButton = styled.button`
-  background:none; border:none; font-size:2rem; cursor:pointer; color:#666; line-height:1; padding:0; width:30px; height:30px;
-  display:flex; align-items:center; justify-content:center;
-  &:hover { color:#003B5C; }
+  background:none; 
+  border:none; 
+  font-size:2rem; 
+  cursor:pointer; 
+  color:#666; l
+  ine-height:1; 
+  padding:0; 
+  width:30px; 
+  height:30px;
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+
+  &:hover { 
+    color:#003B5C; 
+  }
 `;
 
 const TabContainer = styled.div`
-  display:flex; border:2px solid #003B5C; border-radius:50px; overflow:hidden; margin:1.5rem 2.5rem 0;
+  display:flex; 
+  border:2px solid #003B5C; 
+  border-radius:50px; 
+  overflow:hidden; 
+  margin:1.5rem 2.5rem 0;
 `;
 
 const TabButton = styled.button`
-  flex:1; padding:0.8rem; border:none; cursor:pointer; font-weight:600;
+  flex:1; padding:0.8rem; 
+  border:none; 
+  cursor:pointer; 
+  font-weight:600;
   background: ${props => props.$active ? '#0a1e23' : 'transparent'};
   color: ${props => props.$active ? 'white' : '#0a1e23'};
   transition: all 0.3s ease;
-  &:hover { background: ${props => props.$active ? '#0a1e23' : '#f0f4f8'}; }
+  
+  &:hover { 
+    background: ${props => props.$active ? '#0a1e23' : '#f0f4f8'}; 
+  }
 `;
