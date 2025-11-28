@@ -2,18 +2,21 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background-color: ${({ variant }) => 
+    background-color: ${({ variant }) => 
     variant === 'outline' ? 'transparent' : 
-    variant === 'text' ? 'transparent' : '#0a1e23'};
+    variant === 'text' ? 'transparent' : 
+    variant === 'dark-outline' ? 'transparent' : '#0a1e23'};
   
   color: ${({ variant }) => 
     variant === 'outline' ? '#FFFFFF' : 
-    variant === 'text' ? '#FFFFFF' : '#FFFFFF'};
+    variant === 'text' ? '#FFFFFF' : 
+    variant === 'dark-outline' ? '#0a1e23' : '#FFFFFF'};
     
   
   border: ${({ variant }) => 
     variant === 'text' ? 'none' : 
-    variant === 'outline' ? '2px solid #FFFFFF': '#0a1e23'};
+    variant === 'outline' ? '2px solid #FFFFFF': 
+    variant === 'dark-outline' ? '2px solid #0a1e23': 'none'};
   
   padding: ${({ variant }) => 
     variant === 'text' ? '0.5rem 1rem' : '0.75rem 1.5rem'};
