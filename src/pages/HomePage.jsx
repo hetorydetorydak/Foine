@@ -4,22 +4,28 @@ import styled from 'styled-components';
 import { AppBar, Logo, RightNav, LeftNav, NavLink } from '../components/AppBar';
 import { Button } from '../components/Button';
 import AuthModal from '../components/AuthModal';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalType, setAuthModalType] = useState('login'); // 'login' or 'register'
+  const navigate = useNavigate();
 
   const openAuthModal = (type) => {
     setAuthModalType(type);
     setIsAuthModalOpen(true);
   };
 
+  const handleGallery = () => {
+    navigate('/gallery');
+  }
+
   return (
     <>
       <AppBar>
         <LeftNav>
           <Logo>Foine</Logo>
-          <NavLink href="#gallery">Gallery</NavLink>
+          <NavLink onClick = {() => handleGallery()}>Gallery</NavLink>
           <NavLink href="#about">About Us</NavLink>
           <NavLink href="#news">News</NavLink>
         </LeftNav>
@@ -51,7 +57,7 @@ const HomePage = () => {
 
           <HeroActions>
             <Button onClick={() => openAuthModal('register')}>Get Started</Button>
-            <Button variant="outline">View Works</Button>
+            <Button onClick={() => handleGallery()} variant="outline">View Works</Button>
           </HeroActions>
         </HeroContent>
       </HeroSection>
