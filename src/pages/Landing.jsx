@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { AppBar, Logo, Nav } from "../components/AppBar";
+import { AppBar, Logo, RightNav } from "../components/AppBar";
 import { Button } from "../components/Button";
 import { logout } from "../api/auth";
 import { createImagePost, getImagePosts } from "../api/imagePosts";
@@ -83,10 +83,10 @@ export default function Landing() {
     <>
       <AppBar>
         <Logo>Foine</Logo>
-        <Nav>
+        <RightNav>
           <Button variant="text" onClick={() => navigate('/profile')}>Profile</Button>
           <Button variant="outline" onClick={handleLogout}>Logout</Button>
-        </Nav>
+        </RightNav>
       </AppBar>
 
       <Container>

@@ -1,7 +1,7 @@
 // pages/HomePage.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AppBar, Logo, Nav, NavLink } from '../components/AppBar';
+import { AppBar, Logo, RightNav, LeftNav, NavLink } from '../components/AppBar';
 import { Button } from '../components/Button';
 import AuthModal from '../components/AuthModal';
 
@@ -17,18 +17,21 @@ const HomePage = () => {
   return (
     <>
       <AppBar>
-        <Logo>Foine</Logo>
-        <Nav>
+        <LeftNav>
+          <Logo>Foine</Logo>
           <NavLink href="#gallery">Gallery</NavLink>
           <NavLink href="#about">About Us</NavLink>
           <NavLink href="#news">News</NavLink>
+        </LeftNav>
+
+        <RightNav>
           <Button variant="text" onClick={() => openAuthModal('login')}>
             Login
           </Button>
           <Button variant="outline" onClick={() => openAuthModal('register')}>
             Sign up
           </Button>
-        </Nav>
+        </RightNav>
       </AppBar>
 
       <HeroSection>
@@ -38,12 +41,14 @@ const HomePage = () => {
             <br />
             <span>REDEFINED</span>
           </HeroTitle>
+
           <HeroDescription>
             Discover a vibrant digital gallery where creativity thrives
             and inspiration flows endlessly. This platform connects
             artists and enthusiasts by showcasing a vast collection of
             unique artwork.
           </HeroDescription>
+
           <HeroActions>
             <Button onClick={() => openAuthModal('register')}>Get Started</Button>
             <Button variant="outline">View Works</Button>
@@ -51,7 +56,7 @@ const HomePage = () => {
         </HeroContent>
       </HeroSection>
 
-      <AuthModal 
+      <AuthModal
         isOpen={isAuthModalOpen}
         initialType={authModalType}
         onClose={() => setIsAuthModalOpen(false)}
@@ -62,7 +67,11 @@ const HomePage = () => {
 
 const HeroSection = styled.section`
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(234, 192, 102, 0.9) 0%, rgba(136, 131, 141, 1) 50%);
+  background: linear-gradient(
+    135deg,
+    rgba(234, 192, 102, 0.9) 0%,
+    rgba(136, 131, 141, 1) 50%
+  );
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -77,13 +86,13 @@ const HeroSection = styled.section`
     left: 0;
     width: 100%;
     height: 100%;
-    // background: url('https://i.pinimg.com/736x/cc/54/19/cc5419a2cd967d378eb9f036ffc34f45.jpg') center/cover no-repeat;
     transform: rotate(-90deg);
     transform-origin: center;
     opacity: 0.7;
     pointer-events: none;
   }
 `;
+
 const HeroContent = styled.div`
   position: relative;
   z-index: 2;
@@ -100,7 +109,7 @@ const HeroTitle = styled.h1`
   letter-spacing: -1px;
 
   span {
-    // color: #FFA500;
+    /* color: #FFA500; */
   }
 
   @media (max-width: 768px) {
