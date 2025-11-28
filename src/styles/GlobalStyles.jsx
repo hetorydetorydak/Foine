@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #f4f6f8;
+    background-color: #f8f5f0;
     color: #222;
     padding-top: 70px; /* Account for fixed AppBar */
     font-weight: 400;
