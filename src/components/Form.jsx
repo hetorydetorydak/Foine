@@ -105,7 +105,6 @@ const Divider = styled.div`
   }
 
   span {
-    background: white;
     padding: 0 1rem;
     color: #666;
     font-size: 0.9rem;
@@ -122,7 +121,7 @@ const SocialButton = styled.button`
   padding: 0.75rem;
   border-radius: 50px;
   border: 2px solid #ddd;
-  background: white;
+  background: transparent;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;

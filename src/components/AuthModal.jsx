@@ -80,6 +80,7 @@ const ModalContent = styled.div`
   background: white;
   border-radius: 24px;
   color: #003B5C;
+  background: #f8f5f0;
   animation: ${props => props.$isClosing ? slideOutToRight : slideInFromRight} 0.3s ease;
   overflow-y: auto;
   display: flex;
