@@ -84,6 +84,7 @@ export default function Landing() {
       <AppBar>
         <Logo>Foine</Logo>
         <Nav>
+          <Button variant="text" onClick={() => navigate('/profile')}>Profile</Button>
           <Button variant="outline" onClick={handleLogout}>Logout</Button>
         </Nav>
       </AppBar>
