@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { AppBar, Logo, Nav } from '../components/AppBar';
+import { AppBar, Logo, Nav, RightNav } from '../components/AppBar';
 import { Button } from '../components/Button';
 import ProfileHeader from '../components/ProfileHeader';
 import ProfileNav from '../components/ProfileNav';
@@ -48,14 +48,14 @@ const ProfilePage = () => {
     <>
       <AppBar>
         <Logo>Foine</Logo>
-        <Nav>
+        <RightNav>
           <Button variant="text" onClick={() => navigate('/landing')}>
             Gallery
           </Button>
           <Button variant="outline" onClick={handleLogout}>
             Logout
           </Button>
-        </Nav>
+        </RightNav>
       </AppBar>
 
       <ProfileContainer>

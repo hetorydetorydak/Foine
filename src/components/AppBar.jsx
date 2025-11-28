@@ -16,16 +16,22 @@ export const AppBar = styled.header`
   z-index: 100;
 `;
 
+export const LeftNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* spacing between logo + links */
+`;
+
+export const RightNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 export const Logo = styled.h1`
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
-`;
-
-export const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
 `;
 
 export const NavLink = styled.a`
@@ -40,7 +46,8 @@ export const NavLink = styled.a`
 
 export default {
   AppBar,
+  LeftNav,
+  RightNav,
   Logo,
-  Nav,
   NavLink
 };
