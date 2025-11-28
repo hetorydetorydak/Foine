@@ -89,7 +89,7 @@ const EditProfile = () => {
                     accept="image/*"
                     onChange={handleFileChange}
                   />
-                  <Button variant="outline" as="span">
+                  <Button variant="dark-outline" >
                     Change Photo
                   </Button>
                   <FileHint>JPG, PNG recommended. Max 5MB.</FileHint>
