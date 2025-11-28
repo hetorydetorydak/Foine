@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileHeader = ({ 
   profilePicture, 
@@ -10,7 +11,10 @@ const ProfileHeader = ({
   isOwnProfile = false 
 }) => {
   const { posts = 0, followers = 0, following = 0, likes = 0 } = stats;
-
+  const navigate = useNavigate();
+  const handleEditProfile = () => {
+    navigate('/edit-profile');
+  }
   return (
     <HeaderContainer>
       <ProfileSection>
@@ -29,8 +33,7 @@ const ProfileHeader = ({
             <Username>@{username}</Username>
             {isOwnProfile ? (
               <ActionButtons>
-                <Button variant="outline">Edit Profile</Button>
-                <Button variant="outline">View Archive</Button>
+                <Button onClick={handleEditProfile}>Edit Profile</Button>
               </ActionButtons>
             ) : (
               <ActionButtons>
