@@ -1,10 +1,19 @@
-import { apiClient } from "./auth";
+import { axiosInstance } from "./auth";
 
-export const createImagePost = (data) => {
-  // data should be a FormData instance with fields: caption, userId, file
-  return apiClient.post(`/image-posts`, data);
+export const getAllImagePosts = async () => {
+  const response = await axiosInstance.get("/image-posts");
+  return response;
 }
 
-export const getImagePosts = () => {
-  return apiClient.get(`/image-posts`);
+export const getImagePostsById = async (id) => {
+  const response = await axiosInstance.get("/image-posts/${id}");
+  return response.data;
+}
+
+export const createImagePost = (file, caption) => {
+  const formData = new FormData()
+  formData.append("image", file);
+  formData.append("caption", caption);
+
+  return axiosInstance.post("/image-posts", formData);
 }

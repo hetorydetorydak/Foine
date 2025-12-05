@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AppBar, Logo, RightNav } from "../components/AppBar";
 import { Button } from "../components/Button";
-import { getImagePosts } from "../api/imagePosts";
+import { getAllImagePosts } from "../api/imagePosts";
 import { useNavigate } from "react-router-dom";
 import { NavLink, LeftNav } from "../components/AppBar";
 import AuthModal from '../components/AuthModal';
@@ -35,7 +35,7 @@ export default function GalleryPage() {
     try {
       setLoading(true);
       setError("");
-      const res = await getImagePosts();
+      const res = await getAllImagePosts();
       setPosts(res.data || []);
     } catch (err) {
       console.error("Failed to fetch posts", err);
@@ -92,10 +92,10 @@ export default function GalleryPage() {
 
         <GalleryGrid>
           {posts.map((post) => (
-            <GalleryCard key={post.id || post._id}>
-              {(post.imageUrl || post.url || post.fileUrl) ? (
+            <GalleryCard key={post.id}>
+              {(post.imageUrl) ? (
                 <GalleryImage 
-                  src={post.imageUrl || post.url || post.fileUrl} 
+                  src={post.imageUrl} 
                   alt={post.caption}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -111,7 +111,7 @@ export default function GalleryPage() {
               <CardContent>
                 <PostCaption>{post.caption || "Untitled"}</PostCaption>
                 <PostMeta>
-                  <UserInfo>by {post.userId || post.username || "anonymous"}</UserInfo>
+                  <UserInfo>by {post.username || "anonymous"}</UserInfo>
                   {post.createdAt && (
                     <PostDate>
                       {new Date(post.createdAt).toLocaleDateString()}
@@ -145,10 +145,10 @@ export default function GalleryPage() {
 
         <GalleryGrid>
           {posts.map((post) => (
-            <GalleryCard key={post.id || post._id}>
-              {(post.imageUrl || post.url || post.fileUrl) ? (
+            <GalleryCard key={post.id}>
+              {(post.imageUrl) ? (
                 <GalleryImage 
-                  src={post.imageUrl || post.url || post.fileUrl} 
+                  src={post.imageUrl} 
                   alt={post.caption}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -164,7 +164,7 @@ export default function GalleryPage() {
               <CardContent>
                 <PostCaption>{post.caption || "Untitled"}</PostCaption>
                 <PostMeta>
-                  <UserInfo>by {post.userId || post.username || "anonymous"}</UserInfo>
+                  <UserInfo>by {post.username || "anonymous"}</UserInfo>
                   {post.createdAt && (
                     <PostDate>
                       {new Date(post.createdAt).toLocaleDateString()}
