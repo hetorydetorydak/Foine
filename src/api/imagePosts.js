@@ -15,5 +15,7 @@ export const createImagePost = (file, caption) => {
   formData.append("image", file);
   formData.append("caption", caption);
 
-  return axiosInstance.post("/image-posts", formData);
+  const response =  axiosInstance.post("/image-posts", formData);
+  console.log(response + " " + response.data);
+  return response;
 }
