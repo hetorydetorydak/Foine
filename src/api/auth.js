@@ -4,8 +4,6 @@ const API_BASE = process.env.REACT_APP_API_URL;
 
 export const axiosInstance = axios.create({
     baseURL: API_BASE,
-    timeout: 5000,
-    headers: { "Content-Type": "application/json"},
 });
 
 axiosInstance.interceptors.response.use(
