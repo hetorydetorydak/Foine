@@ -6,6 +6,9 @@ import { getAllImagePosts } from "../api/imagePosts";
 import { useNavigate } from "react-router-dom";
 import { NavLink, LeftNav } from "../components/AppBar";
 import AuthModal from '../components/AuthModal';
+import { getAllArtists } from "../api/auth";
+import profile from "../images/profile.png";
+import { Card, CardMedia, Grid, Typography } from "@mui/material";
 
 export default function GalleryPage() {
   const navigate = useNavigate();
@@ -14,6 +17,7 @@ export default function GalleryPage() {
 
   // Posts state
   const [posts, setPosts] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -29,6 +33,7 @@ export default function GalleryPage() {
 
   useEffect(() => {
     fetchPosts();
+    fetchArtists();
   }, []);
 
   const fetchPosts = async () => {
@@ -45,6 +50,20 @@ export default function GalleryPage() {
       setLoading(false);
     }
   }
+
+  const fetchArtists = async () => {
+    try {
+      setLoading(true);
+      const res = await getAllArtists();
+      console.log(res.data);
+      setArtists(res.data || []);
+    } catch (err) {
+      console.error("Failed to fetch artists", err);
+      setArtists([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleRefresh = () => {
     fetchPosts();
@@ -125,56 +144,35 @@ export default function GalleryPage() {
         <Header>
           <Title>Featured Artists</Title>
           <Subtitle>Discover talents</Subtitle>
-          {/* <Button onClick={handleRefresh} disabled={loading}>
-            {loading ? "Refreshing..." : "Refresh Gallery"}
-          </Button> */}
         </Header>
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
         
-        {loading && <LoadingMessage>Loading gallery posts...</LoadingMessage>}
-        
-        {!loading && posts.length === 0 && !error && (
-          <EmptyState>
-            <EmptyIcon>🖼️</EmptyIcon>
-            <EmptyTitle>No public posts yet</EmptyTitle>
-            <EmptyText>Be the first to share your work with the community!</EmptyText>
-            <Button onClick={() => navigate('/create')}>Create First Post</Button>
-          </EmptyState>
-        )}
+        {loading && <LoadingMessage>Loading featured artists...</LoadingMessage>}
 
-        <GalleryGrid>
-          {posts.map((post) => (
-            <GalleryCard key={post.id}>
-              {(post.imageUrl) ? (
-                <GalleryImage 
-                  src={post.imageUrl} 
-                  alt={post.caption}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'block';
-                  }}
-                />
-              ) : null}
-              <ImagePlaceholder style={{ display: 'none' }}>
-                <PlaceholderIcon>📷</PlaceholderIcon>
-                <PlaceholderText>Image not available</PlaceholderText>
-              </ImagePlaceholder>
-              
-              <CardContent>
-                <PostCaption>{post.caption || "Untitled"}</PostCaption>
-                <PostMeta>
-                  <UserInfo>by {post.username || "anonymous"}</UserInfo>
-                  {post.createdAt && (
-                    <PostDate>
-                      {new Date(post.createdAt).toLocaleDateString()}
-                    </PostDate>
-                  )}
-                </PostMeta>
-              </CardContent>
-            </GalleryCard>
+
+        <Grid container size={12}>
+          {artists.map((artist, i) => (
+            <Grid key={i} size={4} sx={{ display: "flex", justifyContent: "center" }}>
+              <Card sx={{ width: "630px", margin: "20px" }}>
+                <CardContent>
+                  <Grid size={12} sx={{ display: "flex" }}>
+                    <CardMedia
+                      component="img"
+                      sx={{ width: "50px", height: "50px", marginRight: "10px" }}
+                      image={profile}
+                      alt="profile"
+                    />
+                    <Grid sx={{ display: "flex", flexDirection: "column" }}>
+                      <Typography variant="body1" fontWeight="bold" fontSize="20px">{artist.username}</Typography>
+                      <Typography variant="caption" fontSize="16px">{artist.email}</Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
           ))}
-        </GalleryGrid>
+        </Grid>
       </Container>
 
       <AuthModal
