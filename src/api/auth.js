@@ -22,11 +22,6 @@ export const setAuthToken = () => {
     }
 }
 
-export const logout = () => {
-    localStorage.removeItem("authToken");
-    setAuthToken();
-}
-
 export const registerUser = (user) => {
     return axiosInstance.post("/register", user);
 }
@@ -42,4 +37,14 @@ export const loginUser = async (credentials) => {
 export const getCurrentUser = async () => {
     const response = await axiosInstance.get("/me");
     return response.data;
+}
+
+export const getAllArtists = async () => {
+    const response = await axiosInstance.get("/artists");
+    return response;
+}
+
+export const logout = () => {
+    localStorage.removeItem("authToken");
+    setAuthToken();
 }
