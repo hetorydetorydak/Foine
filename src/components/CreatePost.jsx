@@ -37,13 +37,13 @@ export default function CreatePost({ onPostCreated }) {
 
     return (
         <>
-            <form style={{ display: "flex", flexDirection: "column", justifyContent: "center", border: "1px solid black", textAlign: "Center" }} onSubmit={handleSubmit}>
+            <form style={{ display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "Center" }} onSubmit={handleSubmit}>
                 <Grid sx={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                     <Grid>
                         <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     </Grid>
                     <Grid>
-                        <CaptionInput value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Caption" size="small" />
+                        <CaptionInput value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Title" size="small" />
                     </Grid>
                     <Grid>
                         <ButtonSubmit type="submit" disabled={loading}>
