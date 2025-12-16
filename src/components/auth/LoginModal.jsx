@@ -18,9 +18,10 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: { xs: '90%', sm: 400 },
   bgcolor: 'background.paper',
-  boxShadow: 24,
+  boxShadow: '0 20px 60px rgba(93, 64, 55, 0.2)',
   p: 4,
-  borderRadius: 2,
+  borderRadius: 3,
+  outline: 'none',
 };
 
 const LoginModal = () => {
@@ -61,20 +62,66 @@ const LoginModal = () => {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen}>
+      <Button 
+        variant="outlined" 
+        onClick={handleOpen}
+        sx={{
+          borderColor: '#5D4037',
+          color: '#5D4037',
+          borderRadius: '12px',
+          padding: '6px 12px',
+          fontSize: '0.875rem',
+          minWidth: 'auto',
+          '&:hover': {
+            backgroundColor: 'rgba(93, 64, 55, 0.1)',
+            borderColor: '#3E2723',
+          }
+        }}
+      >
         Login
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-            <Typography variant="h5">Login to Foine</Typography>
-            <IconButton onClick={handleClose}>
+            <Typography 
+              variant="h5" 
+              sx={{
+                fontFamily: '"Playfair Display", serif',
+                fontWeight: 700,
+                color: '#3E2723'
+              }}
+            >
+              Welcome to Foine
+            </Typography>
+            <IconButton 
+              onClick={handleClose}
+              sx={{
+                color: '#8D6E63'
+              }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
+          
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              mb: 3, 
+              color: '#5D4037',
+              fontStyle: 'italic'
+            }}
+          >
+            Enter your details to access the curated art gallery
+          </Typography>
 
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert 
+              severity="error" 
+              sx={{ 
+                mb: 2,
+                borderRadius: 2
+              }}
+            >
               {error}
             </Alert>
           )}
@@ -88,6 +135,20 @@ const LoginModal = () => {
               onChange={(e) => setEmail(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 2,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -97,15 +158,42 @@ const LoginModal = () => {
               onChange={(e) => setPassword(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 3,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               disabled={loading}
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 1, 
+                mb: 2,
+                py: 1.5,
+                backgroundColor: '#5D4037',
+                color: '#FFFFFF',
+                fontWeight: 600,
+                fontFamily: '"Montserrat", sans-serif',
+                letterSpacing: '0.03em',
+                '&:hover': {
+                  backgroundColor: '#3E2723',
+                  boxShadow: '0 6px 20px rgba(93, 64, 55, 0.3)',
+                }
+              }}
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? 'Logging in...' : 'Login to Gallery'}
             </Button>
           </form>
         </Box>

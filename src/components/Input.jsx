@@ -4,20 +4,23 @@ import styled from 'styled-components';
 export const Input = styled.input`
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #ddd;
+  border: 2px solid rgba(93, 64, 55, 0.3);
   border-radius: 50px;
   font-size: 1rem;
-  transition: border 0.3s ease;
+  transition: all 0.3s ease;
   margin-bottom: 1rem;
+  font-family: 'Lora', serif;
+  color: #3E2723;
 
   &:focus {
     outline: none;
-    border-color: #003B5C;
-    box-shadow: 0 0 0 3px rgba(0, 59, 92, 0.1);
+    border-color: #5D4037;
+    box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.2);
   }
 
   &::placeholder {
-    color: #999;
+    color: #8D6E63;
+    font-style: italic;
   }
 `;
 

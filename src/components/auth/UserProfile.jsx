@@ -11,19 +11,13 @@ import {
 } from '@mui/material';
 import {
   Person,
-  Settings,
   Logout,
-  Palette,
-  Bookmark,
-  Favorite,
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../../contexts/ThemeContext';
 
 const UserProfile = () => {
   const { user, logout } = useAuth();
-  const { toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -44,11 +38,6 @@ const UserProfile = () => {
   const handleProfile = () => {
     handleClose();
     navigate('/profile');
-  };
-
-  const handleSettings = () => {
-    handleClose();
-    // Navigate to settings page if available
   };
 
   return (
@@ -91,34 +80,6 @@ const UserProfile = () => {
             <Person fontSize="small" />
           </ListItemIcon>
           Profile
-        </MenuItem>
-        
-        <MenuItem onClick={handleSettings}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        
-        <MenuItem onClick={() => navigate('/profile?tab=favorites')}>
-          <ListItemIcon>
-            <Favorite fontSize="small" />
-          </ListItemIcon>
-          Favorites
-        </MenuItem>
-        
-        <MenuItem onClick={() => navigate('/profile?tab=bookmarks')}>
-          <ListItemIcon>
-            <Bookmark fontSize="small" />
-          </ListItemIcon>
-          Bookmarks
-        </MenuItem>
-
-        <MenuItem onClick={toggleTheme}>
-          <ListItemIcon>
-            <Palette fontSize="small" />
-          </ListItemIcon>
-          Toggle Theme
         </MenuItem>
         
         <Divider />

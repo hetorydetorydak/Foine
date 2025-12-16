@@ -11,9 +11,14 @@ const Navigation = () => {
   const [value, setValue] = React.useState(0);
 
   React.useEffect(() => {
-    const paths = ['/', '/gallery', '/discover', '/profile'];
-    const index = paths.findIndex(path => location.pathname.startsWith(path));
-    if (index !== -1) setValue(index);
+    // More precise matching for active tab
+    if (location.pathname === '/') {
+      setValue(0);
+    } else if (location.pathname === '/gallery') {
+      setValue(1);
+    } else if (location.pathname === '/discover') {
+      setValue(2);
+    }
   }, [location]);
 
   const handleChange = (event, newValue) => {
@@ -30,13 +35,21 @@ const Navigation = () => {
             '& .MuiTab-root': { 
               fontFamily: '"Karla", sans-serif',
               fontWeight: 500,
+              fontSize: '1rem',
+              textTransform: 'none',
+              minWidth: 120,
+              padding: '12px 16px',
+            },
+            '& .MuiTabs-indicator': {
+              backgroundColor: '#D81B60', // Art-themed pink color
+              height: 3,
+              borderRadius: '3px 3px 0 0',
             }
           }}
         >
           <Tab label="Home" component={Link} to="/" />
           <Tab label="Gallery" component={Link} to="/gallery" />
           <Tab label="Discover" component={Link} to="/discover" />
-          {user && <Tab label="Profile" component={Link} to="/profile" />}
         </Tabs>
         {!user && (
           <Box sx={{ display: 'flex', gap: 1, mr: 2 }}>

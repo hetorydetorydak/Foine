@@ -1,9 +1,15 @@
 import React from 'react';
 import { Container, Box, Typography, Button, Grid, Paper } from '@mui/material';
-import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
+import { 
+  ArrowForward as ArrowForwardIcon,
+  Palette as PaletteIcon,
+  Forum as ForumIcon,
+  Explore as ExploreIcon
+} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import MasonryGallery from '../gallery/MasonryGallery';
+import RegisterModal from '../auth/RegisterModal';
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -39,16 +45,7 @@ const HomePage = () => {
             >
               Explore Gallery
             </Button>
-            <Button
-              variant="outlined"
-              color="inherit"
-              size="large"
-              component={Link}
-              to="/gallery"
-              sx={{ borderColor: 'white', color: 'white' }}
-            >
-              Join Now
-            </Button>
+            <RegisterModal variant="homepage" />
           </Box>
         ) : (
           <Button
@@ -65,35 +62,68 @@ const HomePage = () => {
       </Box>
 
       {/* Features Grid */}
-      <Grid container spacing={4} sx={{ mb: 8 }}>
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, height: '100%' }}>
-            <Typography variant="h5" gutterBottom>
+      <Grid container spacing={4} sx={{ mb: 8, justifyContent: 'center' }}>
+        <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
+          <Paper 
+            sx={{ 
+              p: 3, 
+              width: 300, 
+              height: 300,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <PaletteIcon sx={{ fontSize: 48, color: '#D81B60', mb: 2 }} />
+            <Typography variant="h5" gutterBottom align="center">
               Showcase Artworks
             </Typography>
-            <Typography color="text.secondary">
+            <Typography color="text.secondary" align="center">
               Upload, organize, and display your artwork in beautiful galleries.
               Connect with fellow artists and art enthusiasts.
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, height: '100%' }}>
-            <Typography variant="h5" gutterBottom>
+        <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
+          <Paper 
+            sx={{ 
+              p: 3, 
+              width: 300, 
+              height: 300,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <ForumIcon sx={{ fontSize: 48, color: '#D81B60', mb: 2 }} />
+            <Typography variant="h5" gutterBottom align="center">
               Engage & Connect
             </Typography>
-            <Typography color="text.secondary">
+            <Typography color="text.secondary" align="center">
               Like, comment, and share artworks. Follow your favorite artists
               and build meaningful connections in the art community.
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, height: '100%' }}>
-            <Typography variant="h5" gutterBottom>
+        <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
+          <Paper 
+            sx={{ 
+              p: 3, 
+              width: 300, 
+              height: 300,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <ExploreIcon sx={{ fontSize: 48, color: '#D81B60', mb: 2 }} />
+            <Typography variant="h5" gutterBottom align="center">
               Discover & Explore
             </Typography>
-            <Typography color="text.secondary">
+            <Typography color="text.secondary" align="center">
               Find inspiring artworks through curated collections, personalized
               recommendations, and powerful search tools.
             </Typography>

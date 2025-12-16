@@ -51,12 +51,23 @@ const LikeButton = ({ postId, initialLiked = false, initialCount = 0 }) => {
           aria-label="like" 
           onClick={handleLike}
           disabled={loading}
-          color={liked ? "error" : "default"}
+          sx={{
+            color: liked ? '#D81B60' : 'inherit',
+            '&:hover': {
+              backgroundColor: 'rgba(216, 27, 96, 0.1)',
+            }
+          }}
         >
           {liked ? <Favorite /> : <FavoriteBorder />}
         </IconButton>
       </Tooltip>
-      <Typography variant="body2" color="text.secondary">
+      <Typography 
+        variant="body2" 
+        sx={{ 
+          color: liked ? '#D81B60' : 'text.secondary',
+          fontWeight: liked ? 600 : 400
+        }}
+      >
         {likeCount} {likeCount === 1 ? 'like' : 'likes'}
       </Typography>
     </Box>

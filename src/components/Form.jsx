@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../api/auth";
+import { loginUser, registerUser } from "../api/index";
 
 export const LoginForm = ({ onSuccess }) => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const LoginForm = ({ onSuccess }) => {
       <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <ErrorMessage>{error}</ErrorMessage>
-      <Button type="submit">Sign In</Button>
+      <Button type="submit">Sign In to Gallery</Button>
 
       <Divider><span>OR</span></Divider>
 
@@ -61,6 +61,7 @@ export const RegisterForm = ({ onSuccess }) => {
       onSuccess && onSuccess();
     } catch (err) {
       console.log(err);
+      setError("*Registration failed. Please try again.");
     }
   };
 
@@ -71,7 +72,7 @@ export const RegisterForm = ({ onSuccess }) => {
       <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <Input type="password" placeholder="Confirm password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
       <ErrorMessage>{error}</ErrorMessage>
-      <Button type="submit">Sign Up</Button>
+      <Button type="submit">Join the Art Community</Button>
 
       <Divider><span>OR</span></Divider>
 
@@ -101,13 +102,14 @@ const Divider = styled.div`
     left: 0;
     right: 0;
     height: 1px;
-    background: #ddd;
+    background: rgba(93, 64, 55, 0.2);
   }
 
   span {
     padding: 0 1rem;
-    color: #666;
+    color: #8D6E63;
     font-size: 0.9rem;
+    background: #FFFFFF;
   }
 `;
 
@@ -120,11 +122,13 @@ const SocialButtons = styled.div`
 const SocialButton = styled.button`
   padding: 0.75rem;
   border-radius: 50px;
-  border: 2px solid #ddd;
+  border: 2px solid rgba(93, 64, 55, 0.3);
   background: transparent;
   font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   transition: 0.3s;
+  color: #5D4037;
 
   display: flex;
   align-items: center;
@@ -132,13 +136,14 @@ const SocialButton = styled.button`
   gap: 0.5rem;
 
   &:hover {
-    border-color: #0a1e23;
-    background: #f8f9fa;
+    border-color: #5D4037;
+    background: rgba(93, 64, 55, 0.05);
   }
 `;
 
 const ErrorMessage = styled.h6`
-  color: red;
+  color: #D81B60;
   font-size: 0.75rem;
   margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
 `;

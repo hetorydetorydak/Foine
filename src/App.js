@@ -11,12 +11,14 @@ import ProfilePage from './components/pages/ProfilePage';
 import ArtistPage from './components/pages/ArtistPage';
 import Footer from './components/layout/Footer';
 import { Box } from '@mui/material';
+import { GlobalStyle } from './styles/GlobalStyles';
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <GlobalStyle />
           <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Header />
             <Navigation />

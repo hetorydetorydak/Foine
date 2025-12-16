@@ -43,15 +43,15 @@ const AuthModal = ({ isOpen, initialType = "login", onClose }) => {
       <ModalContent $isClosing={isClosing}>
         <ModalHeader>
           <WelcomeSection>
-            <WelcomeTitle>{activeTab === "login" ? "Welcome Back Creative!" : "Join Our Creative Community!"}</WelcomeTitle>
-            <WelcomeSubtitle>{activeTab === "login" ? "We Are Happy To See You Again" : "Start Your Artistic Journey With Us"}</WelcomeSubtitle>
+            <WelcomeTitle>{activeTab === "login" ? "Welcome Back to Your Gallery" : "Join Our Artistic Community"}</WelcomeTitle>
+            <WelcomeSubtitle>{activeTab === "login" ? "Continue Your Creative Journey" : "Begin Showcasing Your Artwork"}</WelcomeSubtitle>
           </WelcomeSection>
           <CloseButton onClick={handleClose}>×</CloseButton>
         </ModalHeader>
 
         <TabContainer>
           <TabButton $active={activeTab === "login"} onClick={() => setActiveTab("login")}>Sign In</TabButton>
-          <TabButton $active={activeTab === "register"} onClick={() => setActiveTab("register")}>Sign Up</TabButton>
+          <TabButton $active={activeTab === "register"} onClick={() => setActiveTab("register")}>Join Now</TabButton>
         </TabContainer>
 
         {activeTab === "login" ? <LoginForm onSuccess={handleClose} /> : <RegisterForm onSuccess={handleClose} />}
@@ -79,12 +79,13 @@ const ModalContent = styled.div`
   padding: 20px 50px;
   background: white;
   border-radius: 24px;
-  color: #003B5C;
-  background: #f8f5f0;
+  color: #3E2723;
+  background: #FFFFFF;
   animation: ${props => props.$isClosing ? slideOutToRight : slideInFromRight} 0.3s ease;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 20px 60px rgba(93, 64, 55, 0.2);
 
   @media (max-width: 768px) {
     width: 85%;
@@ -97,58 +98,71 @@ const ModalHeader = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 2.5rem 2.5rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(93, 64, 55, 0.1);
 `;
 
-const WelcomeSection = styled.div`flex: 1;`;
+const WelcomeSection = styled.div`
+  flex: 1;
+`;
+
 const WelcomeTitle = styled.h2`
-  font-size:1.5rem; 
-  font-weight:700;
-  margin-bottom:0.5rem; 
-  color:#003B5C;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; 
+  font-weight: 700;
+  margin-bottom: 0.5rem; 
+  color: #3E2723;
+  letter-spacing: 0.02em;
 `;
-const WelcomeSubtitle = styled.p`
-  color:#666; 
-  font-size:0.9rem;
 
+const WelcomeSubtitle = styled.p`
+  color: #8D6E63; 
+  font-size: 1rem;
+  font-family: 'Lora', serif;
+  font-style: italic;
 `;
+
 const CloseButton = styled.button`
-  background:none; 
-  border:none; 
-  font-size:2rem; 
-  cursor:pointer; 
-  color:#666; l
-  ine-height:1; 
-  padding:0; 
-  width:30px; 
-  height:30px;
-  display:flex; 
-  align-items:center; 
-  justify-content:center;
+  background: none; 
+  border: none; 
+  font-size: 2rem; 
+  cursor: pointer; 
+  color: #8D6E63; 
+  line-height: 1; 
+  padding: 0; 
+  width: 30px; 
+  height: 30px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 
   &:hover { 
-    color:#003B5C; 
+    color: #3E2723;
+    background: rgba(93, 64, 55, 0.1);
   }
 `;
 
 const TabContainer = styled.div`
-  display:flex; 
-  border:2px solid #003B5C; 
-  border-radius:50px; 
-  overflow:hidden; 
-  margin:1.5rem 2.5rem 0;
+  display: flex; 
+  border: 2px solid #5D4037; 
+  border-radius: 50px; 
+  overflow: hidden; 
+  margin: 1.5rem 2.5rem 0;
 `;
 
 const TabButton = styled.button`
-  flex:1; padding:0.8rem; 
-  border:none; 
-  cursor:pointer; 
-  font-weight:600;
-  background: ${props => props.$active ? '#0a1e23' : 'transparent'};
-  color: ${props => props.$active ? 'white' : '#0a1e23'};
+  flex: 1; 
+  padding: 0.8rem; 
+  border: none; 
+  cursor: pointer; 
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  background: ${props => props.$active ? '#5D4037' : 'transparent'};
+  color: ${props => props.$active ? 'white' : '#5D4037'};
   transition: all 0.3s ease;
   
   &:hover { 
-    background: ${props => props.$active ? '#0a1e23' : '#f0f4f8'}; 
+    background: ${props => props.$active ? '#3E2723' : 'rgba(93, 64, 55, 0.1)'}; 
   }
 `;

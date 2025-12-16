@@ -52,6 +52,14 @@ const CommentForm = ({ postId, onCommentAdded }) => {
         <Button 
           variant="outlined" 
           onClick={() => alert('Please login to comment')}
+          sx={{
+            borderColor: '#5D4037',
+            color: '#5D4037',
+            '&:hover': {
+              backgroundColor: 'rgba(93, 64, 55, 0.1)',
+              borderColor: '#3E2723',
+            }
+          }}
         >
           Login to comment
         </Button>
@@ -63,7 +71,13 @@ const CommentForm = ({ postId, onCommentAdded }) => {
     <Box component="form" onSubmit={handleSubmit} sx={{ mb: 3 }}>
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
         <Avatar
-          sx={{ width: 40, height: 40 }}
+          sx={{ 
+            width: 40, 
+            height: 40,
+            backgroundColor: '#D81B60',
+            color: '#FFFFFF',
+            fontWeight: 600
+          }}
           src={`https://ui-avatars.com/api/?name=${user.username}&background=random`}
         />
         <Box sx={{ flexGrow: 1 }}>
@@ -72,7 +86,7 @@ const CommentForm = ({ postId, onCommentAdded }) => {
             multiline
             rows={2}
             variant="outlined"
-            placeholder="Add a comment..."
+            placeholder="Share your thoughts on this artwork..."
             value={comment}
             onChange={(e) => {
               setComment(e.target.value);
@@ -83,7 +97,14 @@ const CommentForm = ({ postId, onCommentAdded }) => {
             disabled={loading}
             sx={{
               '& .MuiOutlinedInput-root': {
-                borderRadius: 2,
+                borderRadius: 3,
+                borderColor: 'rgba(93, 64, 55, 0.3)',
+                '&:hover fieldset': {
+                  borderColor: 'rgba(93, 64, 55, 0.5)',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#5D4037',
+                },
               },
             }}
           />
@@ -93,7 +114,18 @@ const CommentForm = ({ postId, onCommentAdded }) => {
               variant="contained"
               endIcon={loading ? <CircularProgress size={20} /> : <SendIcon />}
               disabled={!comment.trim() || loading}
-              sx={{ borderRadius: 2 }}
+              sx={{ 
+                borderRadius: 50,
+                backgroundColor: '#5D4037',
+                color: '#FFFFFF',
+                fontWeight: 600,
+                fontFamily: '"Montserrat", sans-serif',
+                px: 3,
+                '&:hover': {
+                  backgroundColor: '#3E2723',
+                  boxShadow: '0 4px 12px rgba(93, 64, 55, 0.2)',
+                }
+              }}
             >
               {loading ? 'Posting...' : 'Post Comment'}
             </Button>

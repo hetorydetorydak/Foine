@@ -32,14 +32,15 @@ const GalleryPage = () => {
           Discover and share beautiful artworks from talented artists
         </Typography>
         
-        <Box sx={{ display: 'flex', gap: 2, mb: 4, flexWrap: 'wrap' }}>
+        {/* Centered Search Bar */}
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <Paper
             component="form"
             sx={{
               p: '2px 4px',
               display: 'flex',
               alignItems: 'center',
-              flexGrow: 1,
+              width: '100%',
               maxWidth: 600,
             }}
           >
@@ -53,8 +54,10 @@ const GalleryPage = () => {
               <SearchIcon />
             </IconButton>
           </Paper>
-          
-          {user && (
+        </Box>
+        
+        {user && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               variant="contained"
               startIcon={<AddIcon />}
@@ -63,8 +66,8 @@ const GalleryPage = () => {
             >
               Upload Art
             </Button>
-          )}
-        </Box>
+          </Box>
+        )}
       </Box>
 
       <MasonryGallery searchTerm={searchTerm} />
