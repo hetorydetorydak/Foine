@@ -1,31 +1,41 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider } from './contexts/AuthContext';
+import Header from './components/layout/Header';
+import Navigation from './components/layout/Navigation';
+import HomePage from './components/pages/HomePage';
+import GalleryPage from './components/pages/GalleryPage';
+import DiscoverPage from './components/pages/DiscoverPage';
+import ProfilePage from './components/pages/ProfilePage';
+import ArtistPage from './components/pages/ArtistPage';
+import Footer from './components/layout/Footer';
+import { Box } from '@mui/material';
 import { GlobalStyle } from './styles/GlobalStyles';
-import HomePage from './pages/HomePage';
-import Landing from './pages/Landing';
-import ProfilePage from './pages/ProfilePage';
-import EditProfile from './pages/EditProfilePage'; 
-import GalleryPage from './pages/GalleryPage';
-import MainLayout from './pages/MainLayout';
-import CreatePostPage from './pages/CreatePostPage';
 
 function App() {
   return (
-    <>
-      <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/edit-profile" element={<EditProfile />} /> 
-          <Route element={<MainLayout />}>
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/create" element={<CreatePostPage />} />
-          </Route>
-        </Routes>
-      </Router>
-    </>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <GlobalStyle />
+          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Header />
+            <Navigation />
+            <Box component="main" sx={{ flexGrow: 1, py: 3 }}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/discover" element={<DiscoverPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/artist/:id" element={<ArtistPage />} />
+              </Routes>
+            </Box>
+            <Footer />
+          </Box>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

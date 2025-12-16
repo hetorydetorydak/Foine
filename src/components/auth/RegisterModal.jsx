@@ -19,12 +19,13 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: { xs: '90%', sm: 400 },
   bgcolor: 'background.paper',
-  boxShadow: 24,
+  boxShadow: '0 20px 60px rgba(93, 64, 55, 0.2)',
   p: 4,
-  borderRadius: 2,
+  borderRadius: 3,
+  outline: 'none',
 };
 
-const RegisterModal = () => {
+const RegisterModal = ({ variant = 'navigation' }) => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -88,26 +89,89 @@ const RegisterModal = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={handleOpen}>
-        Register
+      <Button 
+        variant={variant === 'homepage' ? 'outlined' : 'contained'} 
+        onClick={handleOpen}
+        sx={
+          variant === 'homepage' 
+            ? {
+                borderColor: 'white',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderColor: 'white',
+                }
+              }
+            : {
+                backgroundColor: '#5D4037',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                padding: '6px 12px',
+                fontSize: '0.875rem',
+                minWidth: 'auto',
+                '&:hover': {
+                  backgroundColor: '#3E2723',
+                  boxShadow: '0 6px 20px rgba(93, 64, 55, 0.3)',
+                }
+              }
+        }
+      >
+        {variant === 'homepage' ? 'Join Now' : 'Signup'}
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-            <Typography variant="h5">Join Foine</Typography>
-            <IconButton onClick={handleClose}>
+            <Typography 
+              variant="h5" 
+              sx={{
+                fontFamily: '"Playfair Display", serif',
+                fontWeight: 700,
+                color: '#3E2723'
+              }}
+            >
+              Join the Art Community
+            </Typography>
+            <IconButton 
+              onClick={handleClose}
+              sx={{
+                color: '#8D6E63'
+              }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
+          
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              mb: 3, 
+              color: '#5D4037',
+              fontStyle: 'italic'
+            }}
+          >
+            Create an account to showcase and discover amazing artwork
+          </Typography>
 
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert 
+              severity="error" 
+              sx={{ 
+                mb: 2,
+                borderRadius: 2
+              }}
+            >
               {error}
             </Alert>
           )}
 
           {success && (
-            <Alert severity="success" sx={{ mb: 2 }}>
+            <Alert 
+              severity="success" 
+              sx={{ 
+                mb: 2,
+                borderRadius: 2
+              }}
+            >
               {success}
             </Alert>
           )}
@@ -121,6 +185,20 @@ const RegisterModal = () => {
               onChange={(e) => setEmail(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 2,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -129,6 +207,20 @@ const RegisterModal = () => {
               onChange={(e) => setUsername(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 2,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -138,6 +230,20 @@ const RegisterModal = () => {
               onChange={(e) => setPassword(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 2,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -147,28 +253,44 @@ const RegisterModal = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               margin="normal"
               required
+              sx={{
+                mb: 3,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.3)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(93, 64, 55, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#5D4037',
+                  },
+                },
+              }}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               disabled={loading}
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 1, 
+                mb: 2,
+                py: 1.5,
+                backgroundColor: '#5D4037',
+                color: '#FFFFFF',
+                fontWeight: 600,
+                fontFamily: '"Montserrat", sans-serif',
+                letterSpacing: '0.03em',
+                '&:hover': {
+                  backgroundColor: '#3E2723',
+                  boxShadow: '0 6px 20px rgba(93, 64, 55, 0.3)',
+                }
+              }}
             >
-              {loading ? 'Registering...' : 'Register'}
+              {loading ? 'Creating Account...' : 'Join the Art Community'}
             </Button>
           </form>
-
-          <Typography variant="body2" color="text.secondary" align="center">
-            By registering, you agree to our{' '}
-            <Link href="#" underline="hover">
-              Terms of Service
-            </Link>{' '}
-            and{' '}
-            <Link href="#" underline="hover">
-              Privacy Policy
-            </Link>
-          </Typography>
         </Box>
       </Modal>
     </>

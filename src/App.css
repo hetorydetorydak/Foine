@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #FDF6EF;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -14,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #5D4037 0%, #D81B60 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,10 +24,18 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: 'Playfair Display', serif;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #FFA000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.App-link:hover {
+  color: #FFD54F;
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +45,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Art-themed focus styles */
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.3);
 }
